@@ -1,0 +1,81 @@
+﻿.a-cleanup {
+    color:inherit;
+}
+
+.a-cleanup {
+    text-decoration:none;
+    overflow:hidden;
+
+}
+    .a-cleanup img {
+        max-height: 300px;
+        object-fit: contain
+    }
+    .card.store-card{
+        height:450px
+    }
+    .a-cleanup:hover {
+        text-decoration: none;
+        color: inherit;
+    }
+
+.card-img-custom{
+    width:100%;
+    height:25vw;
+    object-fit:cover;
+
+}
+
+.store-card{
+    transition:all 0.2s ease;
+    border-radius:10px
+}
+
+.store-card:hover {
+    transform:scale(1.03);
+    box-shadow: lightgray 2px 5px 5px 2px;
+}
+
+.store-btn {
+    transition: all 0.2s ease;
+}
+
+    .store-btn:hover {
+        background-color: forestgreen;
+        border: 1px solid forestgreen;
+    }
+
+
+/* Tarek Custom CSS */
+.card-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.bottom-area{
+    display:flex;
+    justify-content:space-between;
+    align-items:center
+}
+.store,.cart,.order-complete,.order {
+    padding-inline: 2%;
+}
+.card-text{
+    font-weight:bold;
+    color:black;
+}
+.store-content {
+    display:flex;
+    gap:30px
+}
+.store form .filters {
+    display: flex;
+    flex-direction: column;
+}
+input{
+    outline:0
+}
+.cart td, .cart th, .order-complete td, .order-complete th {
+    text-align: center;
+    vertical-align: inherit
+}
