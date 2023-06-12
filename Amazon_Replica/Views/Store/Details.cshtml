@@ -1,0 +1,56 @@
+﻿@model Amazon_Replica.Models.Product
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+@{
+    var base64 = Model.Image != null ? Convert.ToBase64String(Model.Image) : "";
+    var imgSrc = String.Format("data:image/gif;base64,{0}", base64);
+}
+
+<h1>Details</h1>
+
+<div class="row">
+    <div class="col-5">
+
+
+        <div>
+            <h4>Product</h4>
+            <hr />
+            <dl class="row">
+                <dt class="col-sm-3">
+                    @Html.DisplayNameFor(model => model.Name)
+                </dt>
+                <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.Name)
+                </dd>
+                <dt class="col-sm-3">
+                    @Html.DisplayNameFor(model => model.Description)
+                </dt>
+                <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.Description)
+                </dd>
+                <dt class="col-sm-3">
+                    @Html.DisplayNameFor(model => model.Price)
+                </dt>
+                <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.Price)
+                </dd>
+
+            </dl>
+        </div>
+        <div>
+            <a asp-action="Index" class="btn btn-warning"><i class="fa-solid fa-arrow-left"></i>Back to List</a>
+            <a asp-controller="Cart" asp-action="AddToCart" class="btn btn-primary store-btn float-rigth mr-5" asp-route-id="@Model?.Id">Add To Cart<i class="fa-solid fa-cart-plus"></i></a> @*<i class="fa-solid fa-pen-to-square"></i>*@
+        </div>
+
+
+
+    </div>
+
+    <div class="col-4">
+        <img src="@imgSrc" class="w-100" />
+    </div>
+
+</div>

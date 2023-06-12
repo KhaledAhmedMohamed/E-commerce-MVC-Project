@@ -1,0 +1,62 @@
+﻿@model Amazon_Replica.Models.Order
+
+<h2>Thank You For Your Order</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th></th>
+            <th>Product</th>
+            <th>Price</th>
+            <th>Quantity</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.OrderItems)
+        {
+            var base64 = item.Product.Image != null ? Convert.ToBase64String(item.Product.Image) : "";
+            var imgSrc = String.Format("data:image/gif;base64,{0}", base64);
+
+            var itemTotal = item.Product.Price * item.Quatity;
+            <tr>
+                <td>
+                    <a class="a-cleanup" asp-controller="Store" asp-action="Details" asp-route-id="@item.Id">
+                        <img src="@imgSrc" style="height: 4em" />
+                    </a>
+                </td>
+
+                <td>
+                    <a class="a-cleanup" asp-controller="Store" asp-action="Details" asp-route-id="@item.Id">@item.Product.Name</a>
+                </td>
+                <td>@itemTotal.ToString("c")</td>
+
+                <td>
+                    @item.Quatity
+                </td>
+
+            </tr>
+        }
+    </tbody>
+    <tfoot>
+    <td></td>
+    <td class="text-right">Total:</td>
+    <td>@Model?.OrderTotal.ToString("c")</td>
+    <td></td>
+    </tfoot>
+</table>
+
+@{
+    long tots = (long)@Model.OrderTotal * 100;
+}
+<form asp-action="Payment" asp-controller="Order" asp-route-id="@Model.OrderTotal" method="POST">
+    <h4>Please Confirm Your Purchase</h4>
+    <script src="https://checkout.stripe.com/checkout.js"
+            class="stripe-button"
+            data-key="pk_test_51MzpgEGVTyUjKHng1XVLnXYJUY2vlx8CKBk1vgH96rEOwHSMnmFwgFmUqdd5U6DqB8tAqFMwCLy5tM57FuOCnOAe0078tdg4un"
+            data-amount=@tots
+            data-currency="usd">
+    </script>
+</form>
+
+
+

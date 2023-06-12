@@ -1,0 +1,59 @@
+﻿@model IEnumerable<Amazon_Replica.Models.Product>
+@{
+    ViewData["Title"] = "Store";
+}
+
+<div class="store">
+    <h2 class="my-4">Store</h2>
+    <div class="store-content">
+
+        <form asp-action="GetByPriceRange" class=" my-1 p-2 col-2">
+
+            <div>
+                <div class="btn btn-dark rounded disabled">
+                    Price Range
+                </div>
+                <div class="my-1 min-price">
+                    <input type="text" name="minPrice" placeholder="min price" class=" border-light form-control-sm col-12 rounded" />
+                </div>
+                <div class="my-1 min-price">
+                    <input type="text" name="maxPrice" placeholder="max price" class=" border-light form-control-sm col-12 rounded" />
+                </div>
+
+                <input type="submit" value="Filter" class="btn btn-info d-block w-100  rounded mb-1 mt-4" />
+                <a asp-action="Index" class="btn btn-warning d-block w-100  rounded">Clear</a>
+            </div>
+        </form>
+
+<div class="row col-10">
+
+    @foreach (var product in Model)
+    {
+        
+        var base64 = product.Image != null ? Convert.ToBase64String(product.Image) : "";
+        var imgSrc = String.Format("data:image/gif;base64,{0}", base64);
+
+        <div class="col-4">
+            <div class="card my-2 store-card">
+                <a class="a-cleanup" asp-controller="Store" asp-action="Details" asp-route-id="@product.Id">
+                    <img src="@imgSrc" class="card-img-top card-img-custom" />
+
+                    @*<div class="card-body" ></div>*@
+
+                    <div class="card-body">
+                        <div class="info">
+                            <h5 class="mb-1">@product.Name</h5>
+                            <p class="mb-1">@product.Description</p>
+                            <p class="mb-1">In Stock: @product.NumInStock</p>
+                        </div>
+                        <div class="bottom-area">
+                            <span class="card-text">@product.Price.ToString("c")</span>
+                            <a asp-controller="Cart" asp-action="AddToCart" asp-route-id="@product.Id" class="btn btn-primary store-btn float-rigth"><i class="fa-solid fa-cart-plus"></i></a>
+                        </div>
+                    </div>
+
+                </a>
+
+            </div>
+        </div>
+    }
