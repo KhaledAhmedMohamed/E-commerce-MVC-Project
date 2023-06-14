@@ -18,7 +18,7 @@ E commerce web site using ASP.NET MVC Core with google and facebook external log
    * Price filter
    * Add to/delete from/view  cart
    * Create order
-   * Online payment using strip
+   * Online payment using stripe
 
 
 # Note
